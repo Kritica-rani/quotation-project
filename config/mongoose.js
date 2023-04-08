@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const URI =
+  "mongodb+srv://kritica:1234@cluster0.ijhpt7v.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose
   .connect(URI)

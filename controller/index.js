@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+var jwt = require("jsonwebtoken");
 const salt = 10;
 
 // creating the sign up controller action
@@ -81,9 +82,18 @@ module.exports.signIn = async (req, res) => {
         data: {},
       });
     }
+    const token = jwt.sign(
+      {
+        data: {
+          email: user.email,
+        },
+      },
+      "secret",
+      { expiresIn: "1h" }
+    );
     return res.status(200).json({
       message: "Succesfull",
-      data: { user: user.name },
+      data: token,
     });
   } catch (err) {
     console.log("error in sign up", err);
